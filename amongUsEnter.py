@@ -3,7 +3,7 @@ import time
 import threading
 
 from pynput.mouse import Button, Controller
-from pynput.keyboard import Listener, KeyCode
+from pynput.keyboard import Listener, KeyCode, Key
 
 start_stop_key = KeyCode(char='s')
 exit_key = KeyCode(char='e')
@@ -32,15 +32,16 @@ class ClickMouse(threading.Thread):
     def run(self):
         while self.program_running:
             while self.running:
-                mouse.position = (1251, 1302)
+                mouse.position = (1231, 1302)
                 time.sleep(.1)
                 mouse.click(Button.left, 1)
                 time.sleep(.1)
-                mouse.position = (1453, 552)
+                keyboard.press(Key.ctrl)
                 time.sleep(.1)
-                mouse.click(Button.left, 1)
+                keyboard.press('v')
                 time.sleep(.1)
-                mouse.position = (735, 530)
+                keyboard.press(Key.ENTER)
+                mouse.position = (602, 593)
                 time.sleep(.1)
                 mouse.click(Button.left, 1)
                 time.sleep(.1)
@@ -48,6 +49,7 @@ class ClickMouse(threading.Thread):
 
 
 mouse = Controller()
+keyboard = Controller()
 click_thread = ClickMouse(delay, button)
 click_thread.start()
 
